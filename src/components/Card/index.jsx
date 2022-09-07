@@ -8,10 +8,11 @@ const CardWrapper = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    padding: 0em 2em;
+    padding: 1em 2em;
     background-color: ${colors.backgroundLight};
     border-radius: 30px;
     width: 250px;
+    height: 200px;
     transition: 200ms;
     font-size: 20px;
     &:hover {
