@@ -2,7 +2,7 @@ import Card from '../../components/Card';
 import colors from '../../utils/style/color';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { Loader } from '../../utils/style/Atoms.js';
+import { Loader } from '../../utils/style/Atoms.jsx';
 
 const FreelanceSection = styled.section`
   display: flex;
