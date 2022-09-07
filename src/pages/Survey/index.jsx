@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import colors from '../../utils/style/color.js';
 import { Loader } from '../../utils/style/Atoms.jsx';
 import { SurveyContext } from '../../utils/context/index.jsx';
+import { useFetch } from '../../utils/hooks';
 
 const SurveyContainer = styled.div`
   display: flex;
@@ -58,38 +59,22 @@ export default function Survey() {
   const questionNumberInt = parseInt(questionNumber);
   const prevQuestionNumber = questionNumberInt - 1;
   const nextQuestionNumber = questionNumberInt + 1;
-  const [surveyData, setSurveyData] = useState({});
-  const [isDataLoading, setDataLoading] = useState(false);
   const { answers, saveAnswers } = useContext(SurveyContext);
-  const [error, setError] = useState(false);
+  const { data, isLoading, error } = useFetch(`http://localhost:8000/survey`);
+  const surveyData = data?.surveyData;
 
   function saveReply(answer) {
     saveAnswers({ [questionNumber]: answer })
   };
+  
 
-  useEffect(() => {
-    async function fetchSurvey(){
-      setDataLoading(true);
-      try {
-        const response = await fetch(`http://localhost:8000/survey`);
-        const { surveyData } = await response.json();
-        setSurveyData(surveyData);
-      } catch(err) {
-        console.log('===== error =====', err);
-        setError(true);
-      } finally {
-        setDataLoading(false);
-      }
-    }
-    fetchSurvey();
-  }, []);
 
   if(error) return <h1>Une erreur est survenue, recharger la page.</h1>;
 
   return (
     <SurveyContainer>
       <h1>Question n°{questionNumberInt}</h1>
-      {isDataLoading ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <p>{surveyData[questionNumber]}</p>
@@ -111,7 +96,7 @@ export default function Survey() {
       <LinkWrapper>
         {questionNumberInt !== 1 && (
         <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>)}
-        {surveyData[questionNumberInt + 1] ? (
+        {surveyData && surveyData[questionNumberInt + 1] ? (
           <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
         ) : (
           <Link to="/results">Résultats</Link>
