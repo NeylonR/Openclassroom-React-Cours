@@ -8,6 +8,7 @@ import Freelances from './pages/Freelances/index.jsx';
 import Results from './pages/Results/index.jsx';
 import Footer from './components/Footer/index.jsx';
 import GlobalStyle from './utils/style/GlobalStyle.jsx';
+import Profile from './pages/Profile/index.jsx';
 import { ThemeProvider, SurveyProvider } from './utils/context/index.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -24,6 +25,7 @@ root.render(
             <Route path="/survey/:questionNumber" element={<Survey />}/>
             <Route path="/results" element ={<Results />}/>
             <Route path="/freelances" element ={<Freelances />}/>
+            <Route path="/profile/:id" element={<Profile />}/>
             <Route path={'*'} element={<Error />}/>
           </Routes>
         </SurveyProvider>

@@ -1,6 +1,7 @@
 import Card from '../../components/Card';
 import colors from '../../utils/style/color';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Loader } from '../../utils/style/Atoms.jsx';
 import { useFetch } from '../../utils/hooks';
 
@@ -40,12 +41,14 @@ export default function Freelances() {
       ) : (
         <CardsContainer>
         {freelancersList.map((profile, index) => (
-            <Card
-            key={`${profile.name}-${index}`}
-            label={profile.job}
-            picture={profile.picture}
-            title={profile.name}
-          />         
+          <Link key={`freelance-${profile.id}`} to={`/profile/${profile.id}`}>
+              <Card
+              key={`${profile.name}-${index}`}
+              label={profile.job}
+              picture={profile.picture}
+              title={profile.name}
+              />   
+          </Link>      
         ))}
       </CardsContainer>
       )}
