@@ -36,7 +36,7 @@ export default function Freelances() {
       <h1>Freelances</h1>
       <p>Chez Shiny nous réunissons les meilleurs profils pour vous.</p>
       {isLoading ? (
-        <Loader/>
+        <Loader data-testid="loader"/>
       ) : (
         <CardsContainer>
         {freelancersList.map((profile, index) => (
