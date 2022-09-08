@@ -42,7 +42,7 @@ export default function Freelances() {
         {freelancersList.map((profile, index) => (
             <Card
             key={`${profile.name}-${index}`}
-            label={profile.jobTitle}
+            label={profile.job}
             picture={profile.picture}
             title={profile.name}
           />         
